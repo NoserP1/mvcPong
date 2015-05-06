@@ -1,16 +1,19 @@
 #ifndef PONGCONTROLLER_H
 #define PONGCONTROLLER_H
 
+#include <memory>
 #include <QWidget>
 #include <QTimer>
 #include "pongview.h"
 #include "pongmodel.h"
 
+class PongClient;
+
 class PongController : public QWidget
 {
     Q_OBJECT
 public:
-    PongController(PongModel * model, PongView * view, QWidget *parent = 0);
+    PongController(PongModel * model, PongView * view, std::shared_ptr<PongClient> client, QWidget *parent = 0);
     ~PongController();
 
     void startGame();
@@ -43,6 +46,7 @@ private:
 
     PongModel * _model;
     PongView  * _view;
+    std::shared_ptr<PongClient> _client;
 };
 
 #endif // PONGCONTROLLER_H

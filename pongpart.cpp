@@ -38,7 +38,7 @@ void PongPart::moveInto(float direction, float movement)
 PongPart::tTouches PongPart::touches(const PongMember * elementToTest) const
 {
     PongPart::tTouches touches = {NONE,0};
-    const float ITOL = 0.1;
+    const float ITOL = 0.1f;
     QPointF theirPos  = elementToTest->getPos();
     QSizeF  theirSize = elementToTest->getSize();
     //                               x                          ,           y                            ,    width               , height

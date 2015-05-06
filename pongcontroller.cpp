@@ -1,11 +1,14 @@
 #include "pongcontroller.h"
 #include <QTime>
 #include <QKeyEvent>
+#include "pongclient.h"
 
-PongController::PongController(PongModel *model, PongView *view, QWidget *parent)
+
+PongController::PongController(PongModel *model, PongView *view, std::shared_ptr<PongClient> client, QWidget *parent)
     :QWidget(parent)
     ,_model(model)
     ,_view(view)
+    , _client(client)
 {
     setFocusPolicy(Qt::StrongFocus);
 
@@ -104,7 +107,7 @@ void PongController::gameEvent()
         else
         {
             _ballDirection = checkBallOnTouches( _ballDirection);
-            _model->moveBall(_ballDirection,0.085);
+            _model->moveBall(_ballDirection,0.085f);
         }
         _gameTimer->start(10);
         break;
@@ -205,7 +208,7 @@ void PongController::keyPressEvent(QKeyEvent * e)
     switch(e->key())
     {
     case Qt::Key_Up:
-
+        _client->sendMove(PongClient::Move_up);
         paddleTop = _model->getPaddleLeft().getPos().y();
         backTop   = _model->getBackground().getPos().y();
 
@@ -222,6 +225,7 @@ void PongController::keyPressEvent(QKeyEvent * e)
         break;
 
     case Qt::Key_Down:
+        _client->sendMove(PongClient::Move_down);
         paddleBottom = _model->getPaddleLeft().getPos().y() + _model->getPaddleLeft().getSize().height();
         backBottom   = _model->getBackground().getPos().y() + _model->getBackground().getSize().height();
 

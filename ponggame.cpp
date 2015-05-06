@@ -6,14 +6,14 @@
 
 PongGame::PongGame(QWidget *parent)
     :QMainWindow(parent)
+    , _controller()
+    , _view()
+    , _model(new PongModel)
+    , _client(new PongClient)
 {
-
-    _model = new PongModel();
     _view  = new PongView(_model,this);
 
-    _client = new PongClient;
-
-    _controller = new PongController(_model,_view,this);
+    _controller = new PongController(_model,_view,_client,this);
 
     _menuBar = new QMenuBar(this);
     QAction* start = _menuBar->addAction("&Start game");
@@ -53,7 +53,7 @@ void PongGame::showConnectMenu()
 {
   bool ok;
   QString text = QInputDialog::getText(this, tr("Connect to server"),
-                                       tr("IP Address:"), QLineEdit::Normal, QString("192.168.200.20"), &ok);
+                                       tr("IP Address:"), QLineEdit::Normal, QString("10.0.0.64:51100"), &ok);
   if (ok && !text.isEmpty())
   {
     _client->connect(text);
