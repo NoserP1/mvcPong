@@ -41,7 +41,7 @@ void PongClient::getPositions()
   QDataStream in(_socket.get());
   in >> leftPaddle >> rightPaddle >> ball;
   qDebug() << "left: " << leftPaddle << "; right: " << rightPaddle << "; ball: " << ball;
-  _model->movePaddleLeft(leftPaddle.rx(), leftPaddle.ry());
-  _model->movePaddleRight(rightPaddle.rx(), rightPaddle.ry());
-  _model->moveBall(ball.rx(), ball.ry());
+  _model->setPaddleLeft(leftPaddle);
+  _model->setPaddleRight(rightPaddle);
+  _model->setBall(ball);
 }
