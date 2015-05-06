@@ -1,31 +1,36 @@
 #include "ponggame.h"
 
+#include <QMessageBox>
 #include <QInputDialog>
 
 #include "pongclient.h"
+#include "pongserver.h"
 
 PongGame::PongGame(QWidget *parent)
     :QMainWindow(parent)
     , _controller()
     , _view()
     , _model(new PongModel)
-    , _client(new PongClient(_model))
+    , _client(new PongClient)
 {
-    _view.reset(new PongView(_model,this));
+    _view  = new PongView(_model,this);
 
-    _controller.reset(new PongController(_model,_view,_client,this));
+    _controller = new PongController(_model,_view,_client,this);
+    _server = new PongServer();
 
     _menuBar = new QMenuBar(this);
     QAction* start = _menuBar->addAction("&Start game");
     QAction* connect = _menuBar->addAction("&Connect");
+    QAction* server = _menuBar->addAction("&Server");
     QAction* quit  = _menuBar->addAction("&Quit game");
 
-    setCentralWidget(_view.get());
+    setCentralWidget(_view);
     setMenuBar(_menuBar);
 
     QObject::connect(start, SIGNAL(triggered()), this, SLOT(startGame()));
     QObject::connect(connect, SIGNAL(triggered()), this, SLOT(showConnectMenu()));
     QObject::connect(quit, SIGNAL(triggered()), this, SLOT(quitGame()));
+    QObject::connect(server, SIGNAL(triggered()), this, SLOT(showServerIp()));
 
     resize(QSize(800,450));
     setBaseSize(800,450);
@@ -33,6 +38,9 @@ PongGame::PongGame(QWidget *parent)
 
 PongGame::~PongGame()
 {
+    delete _model;
+    delete _view;
+    delete _controller;
     delete _menuBar;
 }
 
@@ -58,3 +66,11 @@ void PongGame::showConnectMenu()
   }
 }
 
+
+void PongGame::showServerIp()
+{
+    QMessageBox msgBox (this);
+    msgBox.setWindowTitle("Server Ip");
+msgBox.setText(_server->getServerIp());
+msgBox.exec();
+}
