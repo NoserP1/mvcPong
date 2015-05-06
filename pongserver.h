@@ -16,7 +16,7 @@ class PongServer: public QObject
     Q_OBJECT
 
 public:
-    PongServer(std::shared_ptr<PongController> controller,std::shared_ptr<PongModel> model,QObject *parent = 0);
+    PongServer(PongController* controller,std::shared_ptr<PongModel> model,QObject *parent = 0);
     ~PongServer();
 
     QString getServerIp();
@@ -32,7 +32,7 @@ private:
     QTcpSocket*      _socket;
     QString          _ipAddress;
     QString          _ipPort;
-    std::shared_ptr<PongController>  _controller;
+    PongController*  _controller;
     std::shared_ptr<PongModel>  _model;
 };
 

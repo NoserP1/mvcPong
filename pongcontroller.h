@@ -13,7 +13,7 @@ class PongController : public QWidget
 {
     Q_OBJECT
 public:
-  PongController(std::shared_ptr<PongModel> model, std::shared_ptr<PongView> view, std::shared_ptr<PongClient> client);
+  PongController(std::shared_ptr<PongModel> model, std::shared_ptr<PongView> view, std::shared_ptr<PongClient> client, QWidget* parent);
     ~PongController();
 
     void startGame();

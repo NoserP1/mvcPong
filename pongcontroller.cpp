@@ -4,8 +4,8 @@
 #include "pongclient.h"
 
 
-PongController::PongController(std::shared_ptr<PongModel> model, std::shared_ptr<PongView> view, std::shared_ptr<PongClient> client)
-    :QWidget()
+PongController::PongController(std::shared_ptr<PongModel> model, std::shared_ptr<PongView> view, std::shared_ptr<PongClient> client, QWidget* parent)
+  :QWidget(parent)
     ,_model(model)
     ,_view(view)
     , _client(client)

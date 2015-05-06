@@ -11,7 +11,7 @@ PongGame::PongGame(QWidget *parent)
     , _model(new PongModel)
     , _view(new PongView(_model))
     , _client(new PongClient(_model))
-    , _controller(new PongController(_model, _view, _client))
+    , _controller(new PongController(_model, _view, _client, this))
     , _server(new PongServer(_controller, _model))
     , _menuBar(new QMenuBar(this))
 {

@@ -24,7 +24,7 @@ private:
   std::shared_ptr<PongModel>  _model;
   std::shared_ptr<PongView>   _view;
   std::shared_ptr<PongClient> _client;
-  std::shared_ptr<PongController> _controller;
+  PongController* _controller;
   std::shared_ptr<PongServer> _server;
 
 //menu bar

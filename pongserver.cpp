@@ -2,7 +2,7 @@
 #include "pongcontroller.h"
 #include <QtNetwork/QtNetwork>
 
-PongServer::PongServer(std::shared_ptr<PongController> controller, std::shared_ptr<PongModel> model, QObject *parent)
+PongServer::PongServer(PongController* controller, std::shared_ptr<PongModel> model, QObject *parent)
 :QObject(parent)
 ,_tcpServer(nullptr)
 ,_networkSession(0)
