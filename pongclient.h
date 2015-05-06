@@ -20,8 +20,6 @@ public:
   void getPositions();
 
 private:
-  void waitForPositions();
-
   qint32 id = -1;
   std::unique_ptr<QTcpSocket> _socket;
   std::shared_ptr<PongModel> _model;

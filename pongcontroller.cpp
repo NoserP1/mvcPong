@@ -209,7 +209,7 @@ void PongController::keyPressEvent(QKeyEvent * e)
     {
     case Qt::Key_Up:
         _client->sendMove(PongClient::Move_up);
-        paddleTop = _model->getPaddleLeft().getPos().y();
+/*        paddleTop = _model->getPaddleLeft().getPos().y();
         backTop   = _model->getBackground().getPos().y();
 
         if(paddleTop - 0.5 <= backTop)
@@ -221,12 +221,12 @@ void PongController::keyPressEvent(QKeyEvent * e)
             _model->movePaddleLeft(90,0.5);
         }
         //update();
-
+*/
         break;
 
     case Qt::Key_Down:
         _client->sendMove(PongClient::Move_down);
-        paddleBottom = _model->getPaddleLeft().getPos().y() + _model->getPaddleLeft().getSize().height();
+/*        paddleBottom = _model->getPaddleLeft().getPos().y() + _model->getPaddleLeft().getSize().height();
         backBottom   = _model->getBackground().getPos().y() + _model->getBackground().getSize().height();
 
         if(paddleBottom + 0.5 >= backBottom)
@@ -238,7 +238,7 @@ void PongController::keyPressEvent(QKeyEvent * e)
             _model->movePaddleLeft(270,0.5);
         }
         update();
-        break;
+*/        break;
     default:
         break;
     }

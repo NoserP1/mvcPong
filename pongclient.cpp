@@ -22,25 +22,15 @@ void PongClient::connect(const QString& ipAddressAndPort)
   _socket.reset(new QTcpSocket(nullptr));
   QStringList address = ipAddressAndPort.split(':');
   _socket->connectToHost(address[0], address[1].toInt());
-  std::async(std::launch::async, [this](){ waitForPositions(); });
+  QObject::connect(_socket.get(), &QTcpSocket::readyRead, [this](){ getPositions(); });
 }
 
 void PongClient::sendMove(Move move)
 {
+  static int i = 0;
   QDataStream out(_socket.get());
   out.setVersion(QDataStream::Qt_5_3);
-  out << move;
-}
-
-void PongClient::waitForPositions()
-{
-  while (true)
-  {
-    if (_socket->bytesAvailable() >= 3 * sizeof(QPointF))
-    {
-      getPositions();
-    }
-  }
+  out << move << i++;
 }
 
 void PongClient::getPositions()
@@ -50,7 +40,8 @@ void PongClient::getPositions()
   QPointF ball;
   QDataStream in(_socket.get());
   in >> leftPaddle >> rightPaddle >> ball;
-  _model->movePaddleLeft(leftPaddle.rx(), leftPaddle.ry());
-  _model->movePaddleRight(rightPaddle.rx(), rightPaddle.ry());
-  _model->moveBall(ball.rx(), ball.ry());
+  qDebug() << "left: " << leftPaddle << "; right: " << rightPaddle << "; ball: " << ball;
+  _model->setPaddleLeft(leftPaddle);
+  _model->setPaddleRight(rightPaddle);
+  _model->setBall(ball);
 }
