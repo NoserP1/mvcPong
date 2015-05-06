@@ -61,7 +61,7 @@ void PongServer::sessionOpened()
     }
 
     _tcpServer = new QTcpServer(this);
-    if (!_tcpServer->listen(QHostAddress("10.0.0.64"),51100)) {
+    if (!_tcpServer->listen(QHostAddress::Any,51100)) {
         qDebug() << tr("Unable to start the server: ").arg(_tcpServer->errorString());
         return;
     }
