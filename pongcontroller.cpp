@@ -273,3 +273,51 @@ int PongController::getRandomBallDirection(bool left, bool rigth)
 
     return randomDirection;
 }
+
+
+void PongController::moveGuestPaddle(uint direction)
+{
+    float paddleTop = 0;
+    float backTop   = 0;
+    float paddleBottom = 0;
+    float backBottom   = 0;
+
+    PongClient::Move move = static_cast<PongClient::Move>(direction);
+    switch(move)
+    {
+    case PongClient::Move_up:
+        _client->sendMove(PongClient::Move_up);
+        paddleTop = _model->getPaddleRight().getPos().y();
+        backTop   = _model->getBackground().getPos().y();
+
+        if(paddleTop - 0.5 <= backTop)
+        {
+            _model->movePaddleRight(90,paddleTop - backTop);
+        }
+        else
+        {
+            _model->movePaddleRight(90,0.5);
+        }
+        //update();
+
+        break;
+
+    case PongClient::Move_down:
+        _client->sendMove(PongClient::Move_down);
+        paddleBottom = _model->getPaddleRight().getPos().y() + _model->getPaddleRight().getSize().height();
+        backBottom   = _model->getBackground().getPos().y() + _model->getBackground().getSize().height();
+
+        if(paddleBottom + 0.5 >= backBottom)
+        {
+            _model->movePaddleRight(270,backBottom - paddleBottom);
+        }
+        else
+        {
+            _model->movePaddleRight(270,0.5);
+        }
+        update();
+        break;
+    default:
+        break;
+    }
+}

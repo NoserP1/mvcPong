@@ -2,6 +2,7 @@
 #define PONGSERVER
 
 #include <QObject>
+#include <memory>
 
 class QTcpServer;
 class QTcpSocket;
@@ -14,7 +15,7 @@ class PongServer: public QObject
     Q_OBJECT
 
 public:
-    explicit PongServer(std::shared_ptr<PongController> controller,QObject *parent = 0);
+    PongServer(std::shared_ptr<PongController> controller,QObject *parent = 0);
     ~PongServer();
 
     QString getServerIp();

@@ -1,5 +1,6 @@
 #include "pongclient.h"
 
+#include <QPointF>
 #include <QTcpSocket>
 #include <QStringList>
 
