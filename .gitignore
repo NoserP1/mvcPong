@@ -5,3 +5,4 @@ mvcPong.pro.user*
 *.opensdf
 debug/moc_*.cpp
 debug/*
+*.orig
