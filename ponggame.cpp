@@ -16,7 +16,7 @@ PongGame::PongGame(QWidget *parent)
     _view.reset(new PongView(_model,this));
 
     _controller.reset(new PongController(_model,_view,_client,this));
-    _server = new PongServer(_controller);
+    _server = new PongServer(_controller,_model);
 
     _menuBar = new QMenuBar(this);
     QAction* start = _menuBar->addAction("&Start game");
