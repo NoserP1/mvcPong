@@ -74,6 +74,22 @@ const QString    & PongModel::getWonText() const
     return _won->getText();
 }
 
+void PongModel::setBall(QPointF newPosition)
+{
+    _ball->moveTo(newPosition);
+}
+
+void PongModel::setPaddleRight(QPointF newPosition)
+{
+    _paddleRight->moveTo(newPosition);
+}
+
+void PongModel::setPaddleLeft(QPointF newPosition)
+{
+    _paddleLeft->moveTo(newPosition);
+}
+
+
 //move routines
 void PongModel::moveBall(float direction,float movement)
 {

@@ -112,7 +112,11 @@ void PongServer::received()
 
 
         in << _model->getPaddleLeft().getPos();
+        qDebug() << _model->getPaddleLeft().getPos();
         in << _model->getPaddleRight().getPos();
+        qDebug() << _model->getPaddleRight().getPos();
         in << _model->getBall().getPos();
+        qDebug() << _model->getBall().getPos();
+
     }
 }
