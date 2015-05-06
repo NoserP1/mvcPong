@@ -8,7 +8,7 @@
 class PongView :public QWidget
 {
 public:
-    PongView(std::shared_ptr<const PongModel> pongModel, QWidget * parent = 0);
+    PongView(std::shared_ptr<const PongModel> pongModel);
     ~PongView();
 
     void paintEvent(QPaintEvent *e);

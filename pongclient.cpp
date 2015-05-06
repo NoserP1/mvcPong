@@ -40,7 +40,6 @@ void PongClient::getPositions()
   QPointF ball;
   QDataStream in(_socket.get());
   in >> leftPaddle >> rightPaddle >> ball;
-  qDebug() << "left: " << leftPaddle << "; right: " << rightPaddle << "; ball: " << ball;
   _model->setPaddleLeft(leftPaddle);
   _model->setPaddleRight(rightPaddle);
   _model->setBall(ball);

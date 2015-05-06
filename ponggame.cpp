@@ -8,17 +8,13 @@
 
 PongGame::PongGame(QWidget *parent)
     :QMainWindow(parent)
-    , _controller()
-    , _view()
     , _model(new PongModel)
+    , _view(new PongView(_model))
     , _client(new PongClient(_model))
+    , _controller(new PongController(_model, _view, _client))
+    , _server(new PongServer(_controller, _model))
+    , _menuBar(new QMenuBar(this))
 {
-    _view.reset(new PongView(_model,this));
-
-    _controller.reset(new PongController(_model,_view,_client,this));
-    _server = new PongServer(_controller,_model);
-
-    _menuBar = new QMenuBar(this);
     QAction* start = _menuBar->addAction("&Start game");
     QAction* connect = _menuBar->addAction("&Connect");
     QAction* server = _menuBar->addAction("&Server");
@@ -38,7 +34,6 @@ PongGame::PongGame(QWidget *parent)
 
 PongGame::~PongGame()
 {
-    delete _menuBar;
 }
 
 void PongGame::startGame()

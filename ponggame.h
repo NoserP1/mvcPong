@@ -21,11 +21,11 @@ public:
     ~PongGame();
 
 private:
-    std::shared_ptr<PongController> _controller;
-    std::shared_ptr<PongView>   _view;
-    std::shared_ptr<PongModel>  _model;
-    std::shared_ptr<PongClient> _client;
-    PongServer*      _server;
+  std::shared_ptr<PongModel>  _model;
+  std::shared_ptr<PongView>   _view;
+  std::shared_ptr<PongClient> _client;
+  std::shared_ptr<PongController> _controller;
+  std::shared_ptr<PongServer> _server;
 
 //menu bar
 private:

@@ -4,8 +4,8 @@
 #include "pongclient.h"
 
 
-PongController::PongController(std::shared_ptr<PongModel> model, std::shared_ptr<PongView> view, std::shared_ptr<PongClient> client, QWidget *parent)
-    :QWidget(parent)
+PongController::PongController(std::shared_ptr<PongModel> model, std::shared_ptr<PongView> view, std::shared_ptr<PongClient> client)
+    :QWidget()
     ,_model(model)
     ,_view(view)
     , _client(client)
@@ -199,46 +199,14 @@ int PongController::checkBallOnTouches(int actualBallDirection)
 
 void PongController::keyPressEvent(QKeyEvent * e)
 {
-    float paddleTop = 0;
-    float backTop   = 0;
-    float paddleBottom = 0;
-    float backBottom   = 0;
-
-
     switch(e->key())
     {
     case Qt::Key_Up:
         _client->sendMove(PongClient::Move_up);
-/*        paddleTop = _model->getPaddleLeft().getPos().y();
-        backTop   = _model->getBackground().getPos().y();
-
-        if(paddleTop - 0.5 <= backTop)
-        {
-            _model->movePaddleLeft(90,paddleTop - backTop);
-        }
-        else
-        {
-            _model->movePaddleLeft(90,0.5);
-        }
-        //update();
-*/
         break;
-
     case Qt::Key_Down:
         _client->sendMove(PongClient::Move_down);
-/*        paddleBottom = _model->getPaddleLeft().getPos().y() + _model->getPaddleLeft().getSize().height();
-        backBottom   = _model->getBackground().getPos().y() + _model->getBackground().getSize().height();
-
-        if(paddleBottom + 0.5 >= backBottom)
-        {
-            _model->movePaddleLeft(270,backBottom - paddleBottom);
-        }
-        else
-        {
-            _model->movePaddleLeft(270,0.5);
-        }
-        update();
-*/        break;
+        break;
     default:
         break;
     }

@@ -4,8 +4,9 @@
 
 PongServer::PongServer(std::shared_ptr<PongController> controller, std::shared_ptr<PongModel> model, QObject *parent)
 :QObject(parent)
-,_tcpServer(0)
+,_tcpServer(nullptr)
 ,_networkSession(0)
+, _socket(nullptr)
 ,_controller(controller)
 ,_model(model)
 {
