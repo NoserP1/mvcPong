@@ -31,15 +31,20 @@ void PongView::paintEvent(QPaintEvent *e)
     QPainter painter(this);
     QFont font=painter.font();
 
-    painter.fillRect(_pongModel->getBackground()*_normFactor,Qt::black);
-    painter.fillRect(_pongModel->getPaddleLeft()*_normFactor,Qt::white);
-    painter.fillRect(_pongModel->getPaddleRight()*_normFactor,Qt::white);
-    painter.fillRect(_pongModel->getBall()*_normFactor,Qt::white);
+    QColor noserGrey(135,135,134);
+    QColor noserOrange(255,121,0);
+
+    painter.fillRect(_pongModel->getBackground()*_normFactor,noserGrey);
+    painter.fillRect(_pongModel->getPaddleLeft()*_normFactor,noserOrange);
+    painter.fillRect(_pongModel->getPaddleRight()*_normFactor,noserOrange);
+    QImage image(":/img/Logo-Noser-Pearl-Transparent.png");
+    painter.drawImage(_pongModel->getBall()*_normFactor, image);
+
 
     //draw score
     font.setPixelSize((_pongModel->getScore()*_normFactor).height());
     painter.setFont(font);
-    painter.setPen(Qt::white);
+    painter.setPen(noserOrange);
     painter.drawText(_pongModel->getScore()*_normFactor,Qt::AlignCenter,_pongModel->getScoreText());
 
     //draw won
@@ -47,14 +52,14 @@ void PongView::paintEvent(QPaintEvent *e)
     font.setPixelSize(getii);
     //font.setPixelSize((_pongModel->getWon()*_normFactor).height());
     painter.setFont(font);
-    painter.setPen(Qt::white);
+    painter.setPen(noserOrange);
     painter.drawText(_pongModel->getWon()*_normFactor,Qt::AlignCenter,_pongModel->getWonText());
 
     //draw count down
     int get = (_pongModel->getCountDown()*_normFactor).height();
     font.setPixelSize(get);
     painter.setFont(font);
-    painter.setPen(Qt::white);
+    painter.setPen(noserOrange);
     painter.drawText(_pongModel->getCountDown()*_normFactor,Qt::AlignCenter,_pongModel->getCountDownText());
 
     QWidget::paintEvent(e);

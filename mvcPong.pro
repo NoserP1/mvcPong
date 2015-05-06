@@ -33,3 +33,6 @@ HEADERS  += \
 	pongclient.h \
 
 FORMS    +=
+
+RESOURCES += \
+    res.qrc
