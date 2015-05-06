@@ -6,3 +6,4 @@ mvcPong.pro.user*
 debug/moc_*.cpp
 debug/*
 *.orig
+*.sln
