@@ -9,18 +9,18 @@ PongGame::PongGame(QWidget *parent)
     , _controller()
     , _view()
     , _model(new PongModel)
-    , _client(new PongClient)
+    , _client(new PongClient(_model))
 {
-    _view  = new PongView(_model,this);
+    _view.reset(new PongView(_model,this));
 
-    _controller = new PongController(_model,_view,_client,this);
+    _controller.reset(new PongController(_model,_view,_client,this));
 
     _menuBar = new QMenuBar(this);
     QAction* start = _menuBar->addAction("&Start game");
     QAction* connect = _menuBar->addAction("&Connect");
     QAction* quit  = _menuBar->addAction("&Quit game");
 
-    setCentralWidget(_view);
+    setCentralWidget(_view.get());
     setMenuBar(_menuBar);
 
     QObject::connect(start, SIGNAL(triggered()), this, SLOT(startGame()));
@@ -33,9 +33,6 @@ PongGame::PongGame(QWidget *parent)
 
 PongGame::~PongGame()
 {
-    delete _model;
-    delete _view;
-    delete _controller;
     delete _menuBar;
 }
 

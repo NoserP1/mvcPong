@@ -20,9 +20,9 @@ public:
     ~PongGame();
 
 private:
-    PongController * _controller;
-    PongView*        _view;
-    PongModel*       _model;
+    std::unique_ptr<PongController> _controller;
+    std::shared_ptr<PongView>   _view;
+    std::shared_ptr<PongModel>  _model;
     std::shared_ptr<PongClient> _client;
 
 //menu bar

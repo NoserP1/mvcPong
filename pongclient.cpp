@@ -3,7 +3,8 @@
 #include <QTcpSocket>
 #include <QStringList>
 
-PongClient::PongClient()
+PongClient::PongClient(std::shared_ptr<PongModel> model)
+: _model(model)
 {
 
 }
@@ -29,5 +30,9 @@ void PongClient::sendMove(Move move)
 
 void PongClient::getPositions()
 {
-
+  QPointF leftPaddle;
+  QPointF rightPaddle;
+  QPointF ball;
+  QDataStream in(_socket.get());
+  in >> leftPaddle >> rightPaddle >> ball;
 }
