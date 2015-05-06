@@ -2,7 +2,7 @@
 #include <QResizeEvent>
 #include <QPainter>
 
-PongView::PongView(const PongModel* pongModel, QWidget *parent)
+PongView::PongView(std::shared_ptr<const PongModel> pongModel, QWidget *parent)
     :QWidget(parent)
     ,_pongModel(pongModel)
     ,_normFactor(10)

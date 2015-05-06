@@ -5,12 +5,13 @@
 #include <QtGlobal>
 
 class QTcpSocket;
+class PongModel;
 
 class PongClient
 {
 public:
-  enum Move { Move_up = 1, Move_down = 2};
-  PongClient();
+  enum Move : quint32 { Move_up = 1u, Move_down = 2u};
+  PongClient(std::shared_ptr<PongModel> model);
   ~PongClient();
 
   void connect(const QString& ipAddressAndPort);
@@ -21,6 +22,7 @@ public:
 private:
   qint32 id = -1;
   std::unique_ptr<QTcpSocket> _socket;
+  std::shared_ptr<PongModel> _model;
 };
 
 
