@@ -1,11 +1,12 @@
 #include "pongserver.h"
-
+#include "pongcontroller.h"
 #include <QtNetwork/QtNetwork>
 
-PongServer::PongServer(QObject *parent)
+PongServer::PongServer(std::shared_ptr<PongController> controller, QObject *parent)
 :QObject(parent)
 ,_tcpServer(0)
 ,_networkSession(0)
+,_controller(controller)
 {
     QNetworkConfigurationManager manager;
     /*if (manager.capabilities() & QNetworkConfigurationManager::NetworkSessionRequired) {
@@ -102,5 +103,6 @@ void PongServer::received()
         in.setVersion(QDataStream::Qt_5_3);
         in >> direction;
         qDebug() << direction;
+        _controller->moveGuestPaddle(direction);
     }
 }

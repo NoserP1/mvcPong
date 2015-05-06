@@ -17,6 +17,7 @@ public:
     ~PongController();
 
     void startGame();
+    void moveGuestPaddle(uint direction);
 
 public slots:
     void gameEvent();
