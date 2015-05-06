@@ -1,6 +1,8 @@
 #ifndef PONGGAME_H
 #define PONGGAME_H
 
+#include <memory>
+
 #include <QMainWindow>
 #include "pongcontroller.h"
 #include "pongview.h"
@@ -22,7 +24,7 @@ private:
     PongController * _controller;
     PongView*        _view;
     PongModel*       _model;
-    PongClient*      _client;
+    std::shared_ptr<PongClient> _client;
     PongServer*      _server;
 
 //menu bar
