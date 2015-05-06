@@ -1,1 +1,7 @@
 mvcPong.pro.user*
+*.filters
+*.vcxproj
+*.sdf
+*.opensdf
+debug/moc_*.cpp
+debug/*

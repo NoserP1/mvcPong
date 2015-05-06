@@ -19,7 +19,8 @@ SOURCES += main.cpp\
     pongmodel.cpp \
     pongview.cpp \
     pongcontroller.cpp \
-    ponggame.cpp
+    ponggame.cpp \
+	pongclient.cpp \
 
 HEADERS  += \
     pongtext.h \
@@ -28,6 +29,7 @@ HEADERS  += \
     pongmodel.h \
     pongview.h \
     pongcontroller.h \
-    ponggame.h
+    ponggame.h \
+	pongclient.h \
 
 FORMS    +=

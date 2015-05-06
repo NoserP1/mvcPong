@@ -1,5 +1,9 @@
 #include "ponggame.h"
 
+#include <QInputDialog>
+
+#include "pongclient.h"
+
 PongGame::PongGame(QWidget *parent)
     :QMainWindow(parent)
 {
@@ -7,17 +11,21 @@ PongGame::PongGame(QWidget *parent)
     _model = new PongModel();
     _view  = new PongView(_model,this);
 
+    _client = new PongClient;
+
     _controller = new PongController(_model,_view,this);
 
     _menuBar = new QMenuBar(this);
     QAction* start = _menuBar->addAction("&Start game");
+    QAction* connect = _menuBar->addAction("&Connect");
     QAction* quit  = _menuBar->addAction("&Quit game");
 
     setCentralWidget(_view);
     setMenuBar(_menuBar);
 
-    connect(start, SIGNAL(triggered()), this, SLOT(startGame()));
-    connect(quit, SIGNAL(triggered()), this, SLOT(quitGame()));
+    QObject::connect(start, SIGNAL(triggered()), this, SLOT(startGame()));
+    QObject::connect(connect, SIGNAL(triggered()), this, SLOT(showConnectMenu()));
+    QObject::connect(quit, SIGNAL(triggered()), this, SLOT(quitGame()));
 
     resize(QSize(800,450));
     setBaseSize(800,450);
@@ -39,5 +47,17 @@ void PongGame::startGame()
 void PongGame::quitGame()
 {
     exit(0);
+}
+
+void PongGame::showConnectMenu()
+{
+  bool ok;
+  QString text = QInputDialog::getText(this, tr("Connect to server"),
+                                       tr("IP Address:"), QLineEdit::Normal, QString("192.168.200.20"), &ok);
+  if (ok && !text.isEmpty())
+  {
+    _client->connect(text);
+
+  }
 }
 
