@@ -6,7 +6,7 @@ PongModel::PongModel()
     _background  = new PongMember(QSizeF(16,9),QPointF(0,0));
     _paddleLeft  = new PongPart(QSizeF(0.2,2),QPointF(1,3.5));
     _paddleRight = new PongPart(QSizeF(0.2,2),QPointF(14.8,3.5));
-    _ball        = new PongPart(QSizeF(0.1,0.1),QPointF(7.95,4.45));
+    _ball        = new PongPart(QSizeF(0.5,0.5),QPointF(7.95,4.45));
 
     _score       = new PongText("0 : 0",QSizeF(2,0.5),QPointF(7,0.5));
     _countDown   = new PongText("",QSizeF(2,2),QPointF(7,3.5));

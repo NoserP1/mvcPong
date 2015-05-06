@@ -31,3 +31,6 @@ HEADERS  += \
     ponggame.h
 
 FORMS    +=
+
+RESOURCES += \
+    res.qrc
