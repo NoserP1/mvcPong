@@ -38,3 +38,5 @@ FORMS    +=
 
 RESOURCES += \
     res.qrc
+
+QMAKE_CXXFLAGS += -std=gnu++0x
