@@ -23,6 +23,9 @@ public:
     const PongMember & getWon() const;
     const QString    & getWonText() const;
 
+    void setBall(QPointF newPosition);
+    void setPaddleRight(QPointF newPosition);
+    void setPaddleLeft(QPointF newPosition);
 
     //move routines
     void moveBall(float direction,float movement);

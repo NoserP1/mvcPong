@@ -1,11 +1,13 @@
 #include "pongserver.h"
-
+#include "pongcontroller.h"
 #include <QtNetwork/QtNetwork>
 
-PongServer::PongServer(QObject *parent)
+PongServer::PongServer(std::shared_ptr<PongController> controller, std::shared_ptr<PongModel> model, QObject *parent)
 :QObject(parent)
 ,_tcpServer(0)
 ,_networkSession(0)
+,_controller(controller)
+,_model(model)
 {
     QNetworkConfigurationManager manager;
     /*if (manager.capabilities() & QNetworkConfigurationManager::NetworkSessionRequired) {
@@ -59,6 +61,7 @@ void PongServer::sessionOpened()
 
     _tcpServer = new QTcpServer(this);
     if (!_tcpServer->listen(QHostAddress("10.0.0.64"),51100)) {
+        qDebug() << tr("Unable to start the server: ").arg(_tcpServer->errorString());
         return;
     }
     QList<QHostAddress> ipAddressesList = QNetworkInterface::allAddresses();
@@ -98,9 +101,22 @@ void PongServer::received()
     if(_socket != NULL)
     {
         uint direction;
+        int add;
         QDataStream in (_socket);
         in.setVersion(QDataStream::Qt_5_3);
         in >> direction;
+        in >> add;
         qDebug() << direction;
+        qDebug() << add;
+        _controller->moveGuestPaddle(direction);
+
+
+        in << _model->getPaddleLeft().getPos();
+        qDebug() << _model->getPaddleLeft().getPos();
+        in << _model->getPaddleRight().getPos();
+        qDebug() << _model->getPaddleRight().getPos();
+        in << _model->getBall().getPos();
+        qDebug() << _model->getBall().getPos();
+
     }
 }
