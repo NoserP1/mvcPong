@@ -8,6 +8,7 @@
 #include <QMenuBar>
 
 class PongClient;
+class PongServer;
 
 class PongGame : public QMainWindow
 {
@@ -22,6 +23,7 @@ private:
     PongView*        _view;
     PongModel*       _model;
     PongClient*      _client;
+    PongServer*      _server;
 
 //menu bar
 private:
@@ -31,6 +33,7 @@ public slots:
     void startGame();
     void quitGame();
     void showConnectMenu();
+    void showServerIp();
 };
 
 #endif // PONGGAME_H

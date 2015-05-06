@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -21,6 +21,7 @@ SOURCES += main.cpp\
     pongcontroller.cpp \
     ponggame.cpp \
 	pongclient.cpp \
+    pongserver.cpp
 
 HEADERS  += \
     pongtext.h \
@@ -31,6 +32,7 @@ HEADERS  += \
     pongcontroller.h \
     ponggame.h \
 	pongclient.h \
+    pongserver.h
 
 FORMS    +=
 
